@@ -3,13 +3,10 @@ class joy{
         let strInput2 = prompt("키를 입력하십시오");
             if(strInput2 < 150){
                 console.log("No");
-            }
-            else if(strInput2 >= 150){
+            } else if(strInput2 >= 150){
                 console.log("Yes");
             }
-            else{
-                console.log("");
-            }
+
 
     }
 }
@@ -19,14 +16,13 @@ class Num{
     num2 = 0;
     num3 = 0;
 
-    constructor(num1, num2, num3){
-        this.num1 = num1;
-        this.num2 = num2;
-        this.num3 = num3;
-    }
-    average(){
-        let d = (this.num1+this.num2+this.num3)/3;
 
+    num1 = parseInt(prompt("키를 입력하십시오"));
+    num2 = parseInt(prompt("키를 입력하십시오"));
+    num3 = parseInt(prompt("키를 입력하십시오"));
+    average(){
+
+        let d = (this.num1+this.num2+this.num3)/3;
         console.log(Math.floor(d));
     }
 }
@@ -36,5 +32,5 @@ class Num{
 
 let Jo = new joy();
 Jo.start();
-let aver = new Num(20,35,46);
+let aver = new Num();
 aver.average();

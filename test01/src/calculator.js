@@ -12,7 +12,7 @@ class Xx{
 
 
 
-
+//원의 넓이 구하기
 class Circle{
     num1 = parseInt(prompt("반지름의 길이"));
 
@@ -21,6 +21,7 @@ class Circle{
         console.log(`원의 넓이는 ${this.num1}*${this.num1}*3.14 = ${result} 입니다.`);
     }
 }
+
 //행성구하기2
 class Eplanet2{
 

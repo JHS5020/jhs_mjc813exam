@@ -5,6 +5,10 @@ class Exam41{
         this.number1 = Number(input);
     }
     start(){
+        if(this.number1 == 1){
+            console.log(`No`);
+            return
+        }
         for(let i = 2; i < this.number1 - 1; i++){
             if(this.number1 % i == 0){
                 console.log(`No`);

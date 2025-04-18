@@ -96,3 +96,64 @@ class Exam41{
         return "Yes";
     }
 }
+
+//42번
+function solveExam42() {
+    let year = document.getElementById("exam42_01").value;
+    let month = document.getElementById("exam42_02").value;
+    let day = document.getElementById("exam42_03").value;
+    // html 태그에서 id="exam42_01" 인 value 속성을 가져온다.
+    if ( true ) {
+        // checkValidInputExam42 함수가 참이면 실행한다.
+        let exam42 = new Exam42(year,month,day);
+        let result = exam42.solve();
+        document.getElementById("exam42result").innerText = result;
+    }
+}
+
+function checkValidInputExam42(number1) {
+//    if ( year <= 0 ||) { // 모르겠음
+//        alert("숫자는 양수를 입력하세요");
+//        return false;
+//    }
+    return true;
+}
+
+class Exam42{
+    year = "";
+    month = "";
+    day = "";
+    constructor(year,month,day){
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
+    solve(){
+        let a =0;
+        a = (this.year + "-"+this.month + "-"+this.day);
+        let dayOfWeek = new Date(a).getDay();
+        switch(dayOfWeek){
+            case 0:
+                return "일요일"
+                break;
+            case 1:
+                return "월요일"
+                break;
+            case 2:
+                return "화요일"
+                break;
+            case 3:
+                return "수요일"
+                break;
+            case 4:
+                return "목요일"
+                break;
+            case 5:
+                return "금요일"
+                break;
+            case 6:
+                return "토요일"
+                break;
+        }
+    }
+}

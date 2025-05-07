@@ -1,11 +1,19 @@
-import com.mjc.mjc813.cal.MyCalculator;
+import com.mjc.studyjava.MyMathMathic;
 
 public class Main {
     public static void main(String[] args) {
-        MyCalculator mCal = new MyCalculator();
-
-        System.out.println("두수(a,b)의 값은 "+mCal.myAdd(10, 30)+"입니다.");
-        System.out.println("두수(a,b)의 값은"+ mCal.myAdd(123456789012345L, 98765432198765L)+"입니다.");
-
+//        int pencils = 534;
+//        int students = 30;
+//
+//        int pencilsPerStudent = 534 / 30;
+//        System.out.println(pencilsPerStudent);
+//
+//        int pencilsLeft = 534 % 30;
+//        System.out.println(pencilsLeft);
+//
+//        int value = 356;
+//        System.out.println(value /100 * 100);
+        //05.07문제
+        MyMathMathic a = new MyMathMathic();
     }
 }

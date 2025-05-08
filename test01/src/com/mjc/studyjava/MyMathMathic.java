@@ -14,10 +14,10 @@ public class MyMathMathic {
         return a * b;
     }
     public int divM(int a,int b){
-        return a % b;
+        return a / b;
     }
     public int divN(int a,int b){
-        return a / b;
+        return a % b;
     }
     //비교연산 메소드 5개
     public boolean same(int a,int b){

@@ -15,7 +15,5 @@ public class Main {
 //        System.out.println(value /100 * 100);
         //05.07문제
         MyMathMathic a = new MyMathMathic();
-        int b = a.divM(10,5);
-        System.out.println(b);
     }
 }

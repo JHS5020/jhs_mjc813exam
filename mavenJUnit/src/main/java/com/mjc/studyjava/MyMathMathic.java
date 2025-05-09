@@ -106,11 +106,9 @@ public class MyMathMathic {
         return sum;
     }
     public int sumOfFav(int a, int b){
-        int sum = 0;
         if(a == b){
-            sum += a;
-            return sum;
+            return a;
         }
-        return sum += b + sumOfFav(a, b - 1);
+        return b + sumOfFav(a, b - 1);
     }
 }

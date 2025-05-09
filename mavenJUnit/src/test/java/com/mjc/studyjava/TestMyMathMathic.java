@@ -46,5 +46,11 @@ public class TestMyMathMathic {
         assertThat(mmm.toOct(961)).isEqualTo("1701");
         assertThat(mmm.toDec("234123")).isEqualTo(234123);
         assertThat(mmm.toDec("77")).isEqualTo(77);
+        //05_09
+        assertThat(mmm.avg(new int []{2,4,6,8,10})).isEqualTo(6);
+        assertThat(mmm.sum(new int []{3,4,5,6,7,8})).isEqualTo(33);
+        assertThat(mmm.sumOfNumber(new int []{1,2,3,4,5,6,7,8,9,10},3)).isEqualTo(18);
+        assertThat(mmm.sumOfLoop(4,10)).isEqualTo(49);
+        assertThat(mmm.sumOfFav(1,11)).isEqualTo(66);
     }
 }

@@ -15,5 +15,6 @@ public class Main {
 //        System.out.println(value /100 * 100);
         //05.07문제
         MyMathMathic a = new MyMathMathic();
+        System.out.println(a.sumOfFav(1,10));
     }
 }

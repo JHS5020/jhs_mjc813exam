@@ -70,4 +70,47 @@ public class MyMathMathic {
     public int toDec(String a){
         return Integer.parseInt(a);
     }
+
+    //05.09 계산기 클래스 업그레이드
+    public int avg(int [] array){
+        int average = 0;
+        int sum = 0;
+        for(int i = 0; i < array.length; i++){
+            sum += array[i];
+        }
+        average = sum / array.length;
+        return average;
+    }
+    public int sum(int [] array){
+
+        int sum = 0;
+        for(int i = 0; i < array.length; i++){
+            sum += array[i];
+        }
+        return sum;
+    }
+    public int sumOfNumber(int [] array, int number){
+        int sum = 0;
+        for(int i = 0; i < array.length; i++){
+            if(array[i] % number == 0) {
+                sum += array[i];
+            }
+        }
+        return sum;
+    }
+    public int sumOfLoop(int a, int b){
+        int sum = 0;
+        for(int i = a; a <= b; a++){
+            sum += a;
+        }
+        return sum;
+    }
+    public int sumOfFav(int a, int b){
+        int sum = 0;
+        if(a == b){
+            sum += a;
+            return sum;
+        }
+        return sum += b + sumOfFav(a, b - 1);
+    }
 }

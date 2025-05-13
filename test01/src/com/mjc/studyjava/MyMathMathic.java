@@ -1,6 +1,7 @@
 package com.mjc.studyjava;
 
-import java.util.Objects;
+import java.math.BigDecimal;
+import java.util.Random;
 
 public class MyMathMathic {
     //산술연산 메소드 5개
@@ -113,4 +114,33 @@ public class MyMathMathic {
         }
         return sum += b + sumOfFav(a, b - 1);
     }
+    public BigDecimal getBigDecimal(int n, int s){
+        BigDecimal a = new BigDecimal(n);
+        BigDecimal b = new BigDecimal(s);
+        String sstr = String.valueOf(s);
+        int length = sstr.length();
+        BigDecimal result = b.movePointLeft(length);
+        return a.add(result);
+    }
+    public Integer[] getIntegerArray(int[] array){
+        Integer[] boxed = new Integer[array.length];
+        for(int i = 0; i < array.length; i++){
+            boxed[i] = array[i];
+        }
+        return boxed;
+    }
+    public int[] makeRandomIntArray(int n){
+        int[] randomArray = new int[n];
+        for(int i = 0; i < n; i++){
+            Random rand = new Random();
+            randomArray[i] = rand.nextInt(100);;
+        }
+        return null;
+    }
+    public String makeEncryptString(String text, int n){
+        return "";
+    }
+
+
+
 }

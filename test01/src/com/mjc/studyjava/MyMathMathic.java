@@ -101,18 +101,18 @@ public class MyMathMathic {
     }
     public int sumOfLoop(int a, int b){
         int sum = 0;
-        for(int i = a; a <= b; a++){
+        for(int i = a; i <= b; a++){
             sum += a;
         }
         return sum;
     }
     public int sumOfFav(int a, int b){
         int sum = 0;
-        if(a == b){
+        if(a >= b){
             sum += a;
             return sum;
         }
-        return sum += b + sumOfFav(a, b - 1);
+        return sum += b + sumOfFav(a    , b - 1);
     }
     public BigDecimal getBigDecimal(int n, int s){
         BigDecimal a = new BigDecimal(n);
@@ -135,12 +135,25 @@ public class MyMathMathic {
             Random rand = new Random();
             randomArray[i] = rand.nextInt(100);;
         }
-        return null;
+        return randomArray;
     }
     public String makeEncryptString(String text, int n){
-        return "";
+        int length = 10;
+        int k = 0;
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+
+        for(int i = 0; i < length; i++){
+            int index = random.nextInt(characters.length());
+            sb.append(characters.charAt(index));
+        }
+        for(int i = 0; i < sb.length(); i++){
+            if(i % n == 0){
+                sb.insert(i,text.charAt(k));
+                k++;
+            }
+        }
+        return sb.toString();
     }
-
-
-
 }

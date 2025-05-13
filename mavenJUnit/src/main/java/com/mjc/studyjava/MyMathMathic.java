@@ -1,6 +1,7 @@
 package com.mjc.studyjava;
 
-import java.util.Objects;
+import java.math.BigDecimal;
+import java.util.Random;
 
 public class MyMathMathic {
     //산술연산 메소드 5개
@@ -75,6 +76,9 @@ public class MyMathMathic {
     public int avg(int [] array){
         int average = 0;
         int sum = 0;
+        if(array == null){
+            return 0;
+        }
         for(int i = 0; i < array.length; i++){
             sum += array[i];
         }
@@ -82,7 +86,9 @@ public class MyMathMathic {
         return average;
     }
     public int sum(int [] array){
-
+        if(array == null){
+            return 0;
+        }
         int sum = 0;
         for(int i = 0; i < array.length; i++){
             sum += array[i];
@@ -91,6 +97,9 @@ public class MyMathMathic {
     }
     public int sumOfNumber(int [] array, int number){
         int sum = 0;
+        if(array == null){
+            return 0;
+        }
         for(int i = 0; i < array.length; i++){
             if(array[i] % number == 0) {
                 sum += array[i];
@@ -100,15 +109,67 @@ public class MyMathMathic {
     }
     public int sumOfLoop(int a, int b){
         int sum = 0;
-        for(int i = a; a <= b; a++){
-            sum += a;
+        for(int i = a; i <= b; i++){
+            sum += i;
         }
         return sum;
     }
     public int sumOfFav(int a, int b){
-        if(a == b){
-            return a;
+        int sum = 0;
+        if(a >= b){
+            sum += a;
+            return sum;
         }
-        return b + sumOfFav(a, b - 1);
+        return sum += b + sumOfFav(a, b - 1);
+    }
+    public BigDecimal getBigDecimal(int n, int s){
+        BigDecimal a = new BigDecimal(n);
+        BigDecimal b = new BigDecimal(s);
+        BigDecimal c = new BigDecimal(-1);
+        String sstr = String.valueOf(s);
+        int length = sstr.length();
+        BigDecimal result = b.movePointLeft(length);
+        if(n < 0){
+           c = c.multiply(result);
+           return a.add(c);
+        }
+        return a.add(result);
+    }
+    public Integer[] getIntegerArray(int[] array){
+        if(array == null){
+            return null;
+        }
+        Integer[] boxed = new Integer[array.length];
+        for(int i = 0; i < array.length; i++){
+            boxed[i] = array[i];
+        }
+        return boxed;
+    }
+    public int[] makeRandomIntArray(int n){
+        int[] randomArray = new int[n];
+        for(int i = 0; i < n; i++){
+            Random rand = new Random();
+            randomArray[i] = rand.nextInt(100);;
+        }
+        return randomArray;
+    }
+    public String makeEncryptString(String text, int n){ // 더 해야함
+
+        int k = 0;
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+
+        for(int i = 0; i < 2 + text.length() * (n-1); i++){ // = 25
+            int index = random.nextInt(characters.length());
+            sb.append(characters.charAt(index));
+        }
+        for(int i = 1; i < sb.length(); i++){
+            if(i % n == 0){
+                sb.insert(i,text.charAt(k));
+                k++;
+            }
+        }
+        return sb.toString();
     }
 }

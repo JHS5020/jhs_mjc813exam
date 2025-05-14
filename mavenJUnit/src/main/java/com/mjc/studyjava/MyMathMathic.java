@@ -25,6 +25,9 @@ public class MyMathMathic {
         return a == b;
     }
     public boolean same(String a,String b){
+        if(a == null || b == null){
+            return false;
+        }
         return a.equals(b);
     }
     public boolean notSame(int a,int b){
@@ -69,6 +72,9 @@ public class MyMathMathic {
         return Integer.toOctalString(a);
     }
     public int toDec(String a){
+        if(a == null){
+            return 0;
+        }
         return Integer.parseInt(a);
     }
 
@@ -154,7 +160,9 @@ public class MyMathMathic {
         return randomArray;
     }
     public String makeEncryptString(String text, int n){ // 더 해야함
-
+        if(text == null){
+            return "";
+        }
         int k = 0;
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         StringBuilder sb = new StringBuilder();
@@ -170,6 +178,21 @@ public class MyMathMathic {
                 k++;
             }
         }
+        sb.deleteCharAt(sb.length()-1);
         return sb.toString();
+    }
+    public String makeDecryptString(String code, int n){
+        if(code == null){
+            return "";
+        }
+        String a = "";
+        for(int i = 1; i < code.length(); i++){
+            if(i % n == 0){
+                a += code.charAt(i);
+            }
+        }
+
+
+        return a;
     }
 }

@@ -88,5 +88,12 @@ public class TestMyMathMathic {
         assertThat(sEnc2.length()).isEqualTo(46);
         assertThat(mmm.makeEncryptString(null, 5)).isEqualTo("");
 
+        String sOrg1 = mmm.makeDecryptString(sEnc1, 5);
+        String sOrg2 = mmm.makeDecryptString(sEnc2, 5);
+        assertThat(sOrg1).isEqualTo("mjc813");
+        assertThat(sOrg1.length()).isEqualTo(6);
+        assertThat(sOrg2).isEqualTo("LeeSunSin");
+        assertThat(sOrg2.length()).isEqualTo(9);
+        assertThat(mmm.makeDecryptString(null, 5)).isEqualTo("");
     }
 }

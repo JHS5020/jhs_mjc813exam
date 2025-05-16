@@ -1,11 +1,12 @@
 package com.mjc813.studyjava;
 
-public class Computer extends Mouse {
+public class Computer{
     private String name = null;
     private String cpu = null;
     private String ram = null;
     private String storage = null;
     private String graphic = null;
+    private Mouse mouse = new Mouse();
 
 
 
@@ -51,5 +52,14 @@ public class Computer extends Mouse {
     }
     public void shutdown(){
         System.out.println(this.name + "이 종료되었습니다.\n");
+    }
+
+    public void clickMouseLeftButton(int x, int y){
+        mouse.moveMouse(x, y);
+        mouse.leftClick();
+    }
+    public void clickMouseRightButton(int x, int y){
+        mouse.moveMouse(x, y);
+        mouse.rightClick();
     }
 }

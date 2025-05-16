@@ -28,10 +28,8 @@ public class Main {
         Computer c6 = new Computer("c6","Gen9_i11","64GB");
         c6.booting();
         c6.myComputer();
-        c6.moveMouse(500,1000);
-        c6.leftClick();
-        c6.moveMouse(20,10);
-        c6.rightClick();
+        c6.clickMouseLeftButton(500,1000);
+        c6.clickMouseRightButton(20,50);
         c6.shutdown();
     }
 }

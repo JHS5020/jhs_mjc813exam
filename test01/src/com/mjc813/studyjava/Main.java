@@ -31,5 +31,6 @@ public class Main {
         c6.clickMouseLeftButton(500,1000);
         c6.clickMouseRightButton(20,50);
         c6.shutdown();
+
     }
 }

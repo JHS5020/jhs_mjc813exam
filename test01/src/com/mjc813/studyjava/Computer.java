@@ -1,13 +1,12 @@
 package com.mjc813.studyjava;
 
 public class Computer{
-    private String name = null;
-    private String cpu = null;
-    private String ram = null;
-    private String storage = null;
-    private String graphic = null;
+    private String name;
+    private String cpu;
+    private String ram;
+    private String storage;
+    private String graphic;
     private Mouse mouse = new Mouse();
-
 
 
     public Computer(String name){
@@ -17,7 +16,9 @@ public class Computer{
         this(name,cpu,null,null,null);
     }
     public Computer(String name,String cpu, String ram){
-        this(name,cpu,ram,null,null);
+        this.name = name;
+        this.cpu = cpu;
+        this.ram = ram;
     }
     public Computer(String name,String cpu, String ram, String storage){
         this(name,cpu,ram,storage,null);
@@ -34,21 +35,29 @@ public class Computer{
     }
     public void myComputer(){
         if(cpu == null){
-            cpu = "조립중입니다";
+            System.out.println("CPU :  조립중입니다");
+        }
+        else{
+            System.out.println("CPU : " + this.cpu);
         }
         if(ram == null){
-            ram = "조립중입니다";
+            System.out.println("RAM :  조립중입니다");
+        }
+        else{
+            System.out.println("RAM : " + this.ram);
         }
         if(storage == null){
-            storage = "조립중입니다";
+            System.out.println("Storage :  조립중입니다");
+        }
+        else{
+            System.out.println("Storage : " + this.storage);
         }
         if(graphic == null){
-            graphic = "조립중입니다";
+            System.out.println("Graphic :  조립중입니다");
         }
-        System.out.println("CPU : " + this.cpu);
-        System.out.println("RAM : " + this.ram);
-        System.out.println("Storage : " + this.storage);
-        System.out.println("Graphic : " + this.graphic);
+        else{
+            System.out.println("Graphic : " + this.graphic);
+        }
     }
     public void shutdown(){
         System.out.println(this.name + "이 종료되었습니다.\n");

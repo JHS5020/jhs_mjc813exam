@@ -1,4 +1,4 @@
-import com.mjc.studyjava.Computer;
+package com.mjc813.studyjava;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,5 +22,16 @@ public class Main {
         c5.booting();
         c5.myComputer();
         c5.shutdown();
+
+
+        //05_16
+        Computer c6 = new Computer("c6","Gen9_i11","64GB");
+        c6.booting();
+        c6.myComputer();
+        c6.moveMouse(500,1000);
+        c6.leftClick();
+        c6.moveMouse(20,10);
+        c6.rightClick();
+        c6.shutdown();
     }
 }

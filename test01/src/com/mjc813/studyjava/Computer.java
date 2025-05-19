@@ -34,25 +34,25 @@ public class Computer{
         System.out.println(this.name + "이 부팅되었습니다.");
     }
     public void myComputer(){
-        if(cpu == null){
+        if(this.cpu == null){
             System.out.println("CPU :  조립중입니다");
         }
         else{
             System.out.println("CPU : " + this.cpu);
         }
-        if(ram == null){
+        if(this.ram == null){
             System.out.println("RAM :  조립중입니다");
         }
         else{
             System.out.println("RAM : " + this.ram);
         }
-        if(storage == null){
+        if(this.storage == null){
             System.out.println("Storage :  조립중입니다");
         }
         else{
             System.out.println("Storage : " + this.storage);
         }
-        if(graphic == null){
+        if(this.graphic == null){
             System.out.println("Graphic :  조립중입니다");
         }
         else{

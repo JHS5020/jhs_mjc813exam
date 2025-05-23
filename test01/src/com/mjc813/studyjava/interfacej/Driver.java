@@ -13,18 +13,18 @@ public class Driver {
     }
     public void drive() {
         if(this.Ivehicle instanceof Truck) {
-            System.out.println(this.name + "은 "+((Truck) this.Ivehicle).wheelCount + "개의 바퀴의 " +((Truck) this.Ivehicle).name+"을 운전합니다");
+            System.out.println(this.name + "은 "+Ivehicle.drive());
         }
         else if(this.Ivehicle instanceof Bicycle) {
-            System.out.println(this.name + "는 "+((Bicycle) this.Ivehicle).wheelCount+"개의 바퀴의 " +((Bicycle) this.Ivehicle).name+"을 운전합니다");
+            System.out.println(this.name + "는 "+Ivehicle.drive());
         }
     }
     public void breakk() {
         if(this.Ivehicle instanceof Truck) {
-            System.out.println(this.name + "은 "+((Truck) this.Ivehicle).name+"을 정지합니다");
+            System.out.println(this.name + "은 "+ Ivehicle.breakk());
         }
         else if(this.Ivehicle instanceof Bicycle) {
-            System.out.println(this.name + "는 "+((Bicycle) this.Ivehicle).name+"을 정지합니다");
+            System.out.println(this.name + "는 "+ Ivehicle.breakk());
         }
     }
     public static void main(String[] args) {

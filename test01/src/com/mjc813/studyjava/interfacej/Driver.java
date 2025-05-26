@@ -13,7 +13,7 @@ public class Driver {
     }
     public void drive() {
         if(this.Ivehicle instanceof Truck) {
-            System.out.println(this.name + "은 "+Ivehicle.drive());
+            System.out.println(this.name+ "은 "+Ivehicle.drive());
         }
         else if(this.Ivehicle instanceof Bicycle) {
             System.out.println(this.name + "는 "+Ivehicle.drive());

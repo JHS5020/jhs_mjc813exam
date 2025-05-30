@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-
+//현서
 public class TestMjcValidCheck {
     @Test
     public void test_MjcValidCheck() {

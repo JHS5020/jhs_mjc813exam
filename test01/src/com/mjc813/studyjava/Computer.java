@@ -1,6 +1,9 @@
 package com.mjc813.studyjava;
 
-public class Computer{
+
+import java.util.Comparator;
+
+public class Computer implements Comparable<Computer>, Comparator<Computer> {
     private String name;
     private String cpu;
     private String ram;
@@ -30,6 +33,36 @@ public class Computer{
         this.storage = storage;
         this.graphic = graphic;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Computer){
+            if(this.cpu.equals(((Computer) obj).cpu)
+            && this.ram.equals(((Computer) obj).ram)
+            && this.storage.equals(((Computer) obj).storage)
+            && this.graphic.equals(((Computer) obj).graphic)){
+                return true;
+            }
+        }
+        return false;
+    }
+    @Override
+    public String toString(){
+        return "이름: " + this.name + "\nCpu: "+this.cpu + "\nRam: "+this.ram
+                + "\nStorage: "+this.storage + "\nGraphic: "+this.graphic;
+    }
+    @Override
+    public int compareTo(Computer o) {
+        if(this.cpu.compareTo(o.cpu) > 0) return 1;
+        else if(this.cpu.compareTo(o.cpu) == 0) return 0;
+        else return -1;
+    }
+    @Override
+    public int compare(Computer o1, Computer o2) {
+        if(o1.ram.compareTo(o2.ram) > 0) return 1;
+        else if(o1.ram.compareTo(o2.ram) == 0) return 0;
+        else return -1;
+    }
+
     public void booting(){
         System.out.println(this.name + "이 부팅되었습니다.");
     }

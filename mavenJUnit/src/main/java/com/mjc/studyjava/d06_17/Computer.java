@@ -141,7 +141,7 @@ public class Computer implements Comparable<Computer>, Comparator<Computer> {
                 .sum();
         System.out.println("모든 종류 컴퓨터의 재고 가격의 합 : " +sum);
         int qty = computers.stream()
-                .filter(p -> p.cpu.startsWith("Gen9_i3"))
+                .filter(p -> p.cpu.equals("Gen9_i3"))
                 .mapToInt(p -> p.qty)
                 .sum();
         System.out.println("가장 성능이 낮은 cpu의 재고 수 : " + qty);

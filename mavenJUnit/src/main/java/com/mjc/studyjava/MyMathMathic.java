@@ -1,5 +1,7 @@
 package com.mjc.studyjava;
 
+import lombok.NonNull;
+
 import java.math.BigDecimal;
 import java.util.Random;
 

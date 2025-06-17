@@ -1,5 +1,8 @@
 package com.mjc813.studyjava;
 
+import lombok.Getter;
+
+@Getter
 public class Bird extends Animal{
     protected String wings = "날개";
 

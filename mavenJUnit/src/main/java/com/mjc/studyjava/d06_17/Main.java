@@ -1,7 +1,8 @@
-package com.mjc813.studyjava;
+package com.mjc.studyjava.d06_17;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Stream;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -35,15 +36,48 @@ public class Main {
         c6.clickMouseRightButton(20,50);
         c6.shutdown();
 
-
         Set<Computer> set = new HashSet<Computer>();
         set.add(c1);
         set.add(c2);
         set.add(c3);
         set.add(c4);
         set.add(c2);
+        Iterator<Computer> iter = set.iterator();
+        while (iter.hasNext()) {
+            Computer computer = iter.next();
+            System.out.println();
+        }
+        for (Computer computer : set) {
+            System.out.println(computer);
+        }
+
         int size = set.size();
+
         System.out.println(size);
 
+        StreamExample();
+        Computer.computerStreamExample();
+
+
+
+
+    }
+    public static void StreamExample() {
+        List<Product> list = new ArrayList<>();
+        for( int i = 0; i < 10; i++ ) {
+            Product p = new Product(i+1, "상품"+i, "회사", (int)(100000 * Math.random()));
+            list.add(p);
+        }
+        list.stream().forEach(
+                p -> System.out.println(p.toString())
+        );
+
+        int sum = list.stream().mapToInt(p -> p.getPrice()).sum();
+        System.out.println(sum);
+        double avg = list.stream().mapToInt(p -> p.getPrice()).average().getAsDouble();
+        System.out.println(avg);
+
+        // 상품 가격의 총합을 구해보세요 stream().map(Product) -> price 를 합계
+        // 상품 가격의 평균을 구해보세요 stream().map(Product) -> price 를 평균
     }
 }

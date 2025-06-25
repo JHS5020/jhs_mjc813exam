@@ -7,5 +7,6 @@ public class Main01 {
         MjcPoint p = new MjcPoint();
         p.addPoint(new Study01(),100);
         p.subPoint(new Study01(),200);
+
     }
 }

@@ -79,6 +79,51 @@ public class ContactMysqlDAO {
 		return "list.jsp";
 	}
 
+	public String modify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<ContactDto>list = new ArrayList<>();
+		try {
+			conn = getConnection();
+			int id = Integer.parseInt(request.getParameter("id"));
+			/// 수정할 회원정보 가져오기
+			String sql = " SELECT ";
+			sql+= " id, ";
+			sql+= " name, ";
+			sql+= " phoneNumber, ";
+			sql+= " zipNumber, ";
+			sql+= " email ";
+			sql+= " FROM contact_tbl WHERE id ="+id;
+			System.out.printf("modify : sql=%s\n", sql);
+			/// 로그가 없으므로 콘솔에 출력했다
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				/// sql 쿼리가 리턴하는 행 이 있다면 값을 설정한다.
+				ContactDto MemberDto = new ContactDto();
+				MemberDto.setId(rs.getInt(1));
+				MemberDto.setName(rs.getString(2));
+				MemberDto.setPhoneNumber(rs.getString(3));
+				MemberDto.setZipNumber(rs.getString(4));
+				MemberDto.setEmail(rs.getString(5));
+				/// 컬럼의 값을 가져온다. 이것은 배열이 아니므로 1 부터 6개 컬럼의 값을 MemberDto 객체에 가져온다.
+				list.add(MemberDto);
+				/// MemberDto 객체 한 개만 list 배열에 추가한다.
+			}
+
+			request.setAttribute("list",list);
+			/// modify.jsp 8 라인의 list = (ArrayList<MemberDto>)request.getAttribute("list"); 값으로 치환되어 list 배열에 저장
+			/// modify.jsp 10~16 라인의 list 배열 0 index 변수의 값을 화면에 출력하는데 사용됨
+
+			conn.close();
+			ps.close();
+			rs.close();
+			/// RDBMS 접속하고 사용 했었던 자원을 해제해야 한다. 이거 안하면 자원 누수로 나중에 프로그램 뻗었었음
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "modify.jsp";
+	}
+
 	/*
 	 * request : http 클라이언트 요청에 대한 정보가 해당 객체로 전달 된다.
 	 * response : http 클라이언트의 응답에 대한 정보가 반환 된다.
@@ -94,7 +139,7 @@ public class ContactMysqlDAO {
 		try {
 			conn = getConnection();
 			/// prepareStatement는 순서에 따라 값이 등록된다.
-			String sql = "INSERT INTO contact_tbl VALUES(?,?,?,?)";
+			String sql = "INSERT INTO contact_tbl(name, phoneNumber, zipNumber, email) VALUES(?,?,?,?)";
 			ps = conn.prepareStatement(sql);
 
 			/// sql Insert, Update 쿼리가 실행될때 저장할 값을 1번부터 7번까지 설정하여 sql 쿼리문장을 만든다.

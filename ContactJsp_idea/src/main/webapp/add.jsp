@@ -24,7 +24,7 @@ request.setCharacterEncoding("UTF-8");
 <table>
 	<tr>
 		<th>연락처번호(자동발생)</th>
-		<td><input name="custno" value="<%=custno %>" readonly value="1"></td>
+		<td><input name="id" readonly value="" disabled></td>
 	</tr>
 	<tr>
 		<th>연락처성명 (최대 5자)</th>

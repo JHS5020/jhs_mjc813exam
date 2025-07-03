@@ -60,7 +60,7 @@ public class Controller extends HttpServlet {
 			break;
 
 		case "/add" :
-			site = "add";
+			site = "add.jsp";
 			break;
 			
 		case "/insert" :		
@@ -68,7 +68,7 @@ public class Controller extends HttpServlet {
 			break;
 			
 		case "/modify" :		
-//			site = dao.modify(request, response);
+			site = dao.modify(request, response);
 			break;
 			
 		case "/update" :

@@ -123,3 +123,66 @@ inner join saled_tbl on
 inner join location_tbl on
 	location_tbl.id = location_id
 	;
+	
+	
+
+
+07_04
+CREATE OR REPLACE VIEW sell
+	AS
+	select
+		name,
+		phoneNumber,
+		product,
+		price,
+		qty,
+		discount,
+		(price * qty - discount) AS total,
+	--	location_id,
+		location
+from
+	contact_tbl
+inner join saled_tbl on
+	contact_tbl.id = contact_id
+inner join location_tbl on
+	location_tbl.id = location_id
+	;
+
+SELECT * FROM sell
+
+CREATE OR REPLACE VIEW learn
+	AS
+	select
+		name,
+	phoneNumber,
+	email,
+	addr,
+	score,
+	subject,
+	teacher,
+	root_num,
+	start_dt,
+	end_dt
+from
+	contact_tbl
+inner join learn_tbl on
+	contact_tbl.id = learn_tbl.contact_id
+inner join lecture_tbl on
+	lecture_tbl.id = learn_tbl.lecture_id
+	;
+	
+SELECT * FROM learn
+
+SELECT 
+	name
+	, min(start_dt)
+	, max(end_dt)
+	from learn
+group by name
+	;
+	
+SELECT 
+	subject
+	,count(name) AS qty
+	from learn
+group by subject

@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: sb_first
+server:
+  port: 18080

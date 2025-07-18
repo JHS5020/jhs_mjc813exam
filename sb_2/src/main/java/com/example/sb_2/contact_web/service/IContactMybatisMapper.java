@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.Mapping;
 
 import java.util.List;
 
-@Mapping
+//@Mapping
 public interface IContactMybatisMapper {
     public void insert();
     public List<Contact> selectAll();

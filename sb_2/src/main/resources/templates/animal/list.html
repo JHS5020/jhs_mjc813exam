@@ -7,6 +7,16 @@
 <body>
     <h1>동물 목록</h1>
     <div>
+        <h5>동물 검색</h5>
+        <label for="searchType">검색종류</label>
+        <select id="searchType" name="searchType">
+            <option value="name">이름검색</option>
+            <option value="kind">종류검색</option>
+        </select>
+        <label for="searchName">포함단어</label><input type="text" id="searchName" name="searchName" value="">
+        <button onclick="javascript::doSearch();">검색</button>
+    </div>
+    <div>
         <span>ID</span>
         <span>동물 이름</span>
         <span>동물 나이</span>
@@ -21,4 +31,12 @@
     </div>
     {{/ListWord}}
 </body>
+<script>
+    function doSearch() {
+        let searchType = document.getElementById(searchType).value;
+        let searchName = document.getElementById(searchName).value;
+        let url = ".list?searchType" + searchType + "&searchNord" + searchNord;
+        // document
+    }
+</script>
 </html>

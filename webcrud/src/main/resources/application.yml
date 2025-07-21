@@ -10,10 +10,15 @@ spring:
   mustache:
     cache: false
     suffix: .html
+    enabled: true
 
 sever:
   port: 8080
-
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml	# /src/main/resources/mapper/**/*.xml 이곳에서 xml 파일을 검색한다.
   configuration:

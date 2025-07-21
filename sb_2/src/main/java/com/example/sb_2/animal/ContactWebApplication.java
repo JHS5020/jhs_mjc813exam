@@ -1,4 +1,4 @@
-package com.example.sb_2.contact_web;
+package com.example.sb_2.animal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

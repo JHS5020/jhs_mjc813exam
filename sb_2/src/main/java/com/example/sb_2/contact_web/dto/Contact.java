@@ -1,17 +1,17 @@
-package com.example.sb_2.contact_web.dto;
-
-
-import lombok.*;
-
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class Contact implements IContact {
-    private Long id;
-    private  String name;
-    private  String phoneNumber;
-    private  String zipNumber;
-    private  String email;
-}
+//package com.example.sb_2.contact_web.dto;
+//
+//
+//import lombok.*;
+//
+//@Getter
+//@Setter
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Builder
+//public class Contact implements IContact {
+//    private Long id;
+//    private  String name;
+//    private  String phoneNumber;
+//    private  String zipNumber;
+//    private  String email;
+//}

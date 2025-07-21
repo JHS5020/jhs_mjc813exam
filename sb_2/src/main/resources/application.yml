@@ -1,22 +1,25 @@
 spring:
+  datasource: # mysql 일경우
+    url: jdbc:mysql://localhost:3306/mpacrud_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8	# 데이터베이스 URL
+    driver-class-name: com.mysql.cj.jdbc.Driver  # JDBC 드라이버 클래스 (MySQL의 경우)
+    username: mpauser  # 데이터베이스 사용자 이름
+    password: qwer1234!  # 데이터베이스 비밀번호
   application:
-    name: contact_web
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: goals00002
-    password: 123456
-    url: jdbc:mysql://localhost:3306/contact_web?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    name: sb_2
 
-server:
-  port: 18080
+  mustache:
+    cache: false
+    suffix: .html
+
+sever:
+  port: 8080
   servlet:
     encoding:
       charset: UTF-8
       enabled: true
       force: true
-
 mybatis:
-  mapper-locations: classpath:mapper/**/*.xml
+  mapper-locations: classpath:mapper/**/*.xml	# /src/main/resources/mapper/**/*.xml 이곳에서 xml 파일을 검색한다.
   configuration:
-    map-underscore-to-camel-case: true
-  type-aliases-package: com.mjc813.contact_web
+    map-underscore-to-camel-case: true	# DB의 컬럼명에 abc_def 언더라인을 abcDef camelCase 변환한다.(Java를 위하여)
+  type-aliases-package: com.example.sb_2

@@ -16,4 +16,37 @@
             ,#{nickName}
         )
 	</insert>
+
+    <select id="findAll" resultType="MemberDto">
+        SELECT
+            id
+             , userId
+             , name
+             , nickName
+        FROM member_tbl
+        ORDER BY id
+    </select>
+
+    <select id="findById" resultType="MemberDto" parameterType="Long">
+        SELECT
+            id
+             , userId
+             , name
+             , nickName
+        FROM member_tbl
+        WHERE id = #{id}
+    </select>
+
+    <update id="update" parameterType="MemberDto">
+        UPDATE member_tbl SET
+            userId = #{userId}
+                            , name = #{name}
+                            , nickName = #{nickName}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="Long">
+        DELETE FROM member_tbl
+        WHERE id = #{id}
+    </delete>
 </mapper>

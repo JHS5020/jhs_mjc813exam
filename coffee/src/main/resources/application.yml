@@ -1,1 +1,25 @@
-spring.application.name=coffee
+spring:
+  datasource: # mysql ???
+    url: jdbc:mysql://localhost:3306/coffe?serverTimezone=Asia/Seoul&characterEncoding=UTF-8	# ?????? URL
+    driver-class-name: com.mysql.cj.jdbc.Driver  # JDBC ???? ??? (MySQL? ??)
+    username: coffe01  # ?????? ??? ??
+    password: qwer1234!  # ?????? ????
+  application:
+    name: coffee
+
+  mustache:
+    cache: false
+    suffix: .html
+
+sever:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml	# /src/main/resources/mapper/**/*.xml ???? xml ??? ????.
+  configuration:
+    map-underscore-to-camel-case: true	# DB? ???? abc_def ????? abcDef camelCase ????.(Java? ???)
+  type-aliases-package: com.example.coffee

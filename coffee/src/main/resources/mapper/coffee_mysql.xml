@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.coffee.mybatis.ICoffeeMybatisMapper">
+
+    <insert id="insertCoffee" parameterType="CoffeeDto">
+        INSERT INTO coffee_tbl(
+            id
+            ,name
+            ,price
+            ,source
+            ,shots
+        ) VALUES (
+            #{id}
+            ,#{name}
+            ,#{price}
+            ,#{source}
+            ,#{shots}
+        )
+    </insert>
+    <select id="fineAllCoffee" resultType="CoffeeDto">
+        SELECT
+            id
+            ,name
+            ,price
+            ,source
+            ,shots
+        FROM coffee_tbl
+        ORDER BY id
+    </select>
+</mapper>

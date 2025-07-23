@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>커피 찾기</title>
+</head>
+<body>
+    <h1>커피 검색</h1>
+    <div>
+        <span>ID</span>
+        <span>커피 이름</span>
+        <span>커피 가격</span>
+        <span>소스 정보</span>
+        <span>샷 수</span>
+    </div>
+    {{#ListCoffee}}
+        <span>{{id}}</span>
+        <span>{{name}}</span>
+        <span>{{price}}</span>
+        <span>{{source}}</span>
+        <span>{{shots}}</span>
+    <br>{{/ListCoffee}}
+</body>
+</html>

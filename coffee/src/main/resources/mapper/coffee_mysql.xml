@@ -28,4 +28,14 @@
         FROM coffee_tbl
         ORDER BY id
     </select>
+    <select id="findCoffee" parameterType="Long" resultType="CoffeeDto">
+        SELECT
+            id
+             ,name
+             ,price
+             ,source
+             ,shots
+        FROM coffee_tbl
+        WHERE id = #{id}
+    </select>
 </mapper>

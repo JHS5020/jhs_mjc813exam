@@ -9,4 +9,5 @@ import java.util.List;
 public interface ICoffeeMybatisMapper {
     public void insertCoffee(CoffeeDto dto);
     public List<CoffeeDto> fineAllCoffee();
+    public CoffeeDto findCoffee(Long id);
 }

@@ -5,10 +5,7 @@ import com.example.coffee.service.CoffeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,14 +24,33 @@ public class CoffeeController {
 
     @PostMapping("/insert")
     public String insert(@ModelAttribute CoffeeDto dto) {
-        this.coffeeService.insertCoffee(dto);
+        try {
+            this.coffeeService.insertCoffee(dto);
+        } catch (Throwable e) {
+            System.out.println(e.toString());
+        }
         return "/coffe/addview";
     }
 
     @GetMapping("/list")
     public String list(Model model) {
-        List<CoffeeDto>  coffeeDtos = this.coffeeService.fineAllCoffee();
-        model.addAttribute("ListCoffee", coffeeDtos);
+        try {
+            List<CoffeeDto>  coffeeDtos = this.coffeeService.fineAllCoffee();
+            model.addAttribute("ListCoffee", coffeeDtos);
+        } catch (Throwable e) {
+            System.out.println(e.toString());
+        }
         return "/coffe/findall";
+    }
+
+    @GetMapping("/find")
+    public String find(@RequestParam("id") Long id, Model model) {
+        try {
+            CoffeeDto coffeeDto = this.coffeeService.findCoffee(id);
+            model.addAttribute("data", coffeeDto);
+        } catch (Throwable e) {
+            System.out.println(e.toString());
+        }
+        return "/coffe/find";
     }
 }

@@ -16,8 +16,14 @@ public class CoffeeService {
     public void insertCoffee(CoffeeDto dto) {
         this.coffeeMybatisMapper.insertCoffee(dto);
     }
+
     public List<CoffeeDto> fineAllCoffee(){
         List<CoffeeDto> coffeeDtos = this.coffeeMybatisMapper.fineAllCoffee();
         return coffeeDtos;
+    }
+
+    public CoffeeDto findCoffee(Long id){
+        CoffeeDto coffeeDto = this.coffeeMybatisMapper.findCoffee(id);
+        return coffeeDto;
     }
 }

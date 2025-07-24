@@ -14,11 +14,15 @@
         <span>샷 수</span>
     </div>
     {{#ListCoffee}}
+    <a href="./find?id={{id}}">
         <span>{{id}}</span>
         <span>{{name}}</span>
         <span>{{price}}</span>
         <span>{{source}}</span>
         <span>{{shots}}</span>
-    <br>{{/ListCoffee}}
+        <br>
+    </a>
+    {{/ListCoffee}}
+    <button onclick="location.href='./addview'">커피 추가</button>
 </body>
 </html>

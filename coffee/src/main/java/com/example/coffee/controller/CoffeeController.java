@@ -29,7 +29,7 @@ public class CoffeeController {
         } catch (Throwable e) {
             System.out.println(e.toString());
         }
-        return "/coffe/addview";
+        return "redirect:/coffee/list";
     }
 
     @GetMapping("/list")

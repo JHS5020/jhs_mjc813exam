@@ -8,18 +8,20 @@
     <h1>검색 찾기 결과</h1>
     <div>
         {{#data}}
-        <form method="post" action="./delete">
-        <label for="id">id : </label><input type="text" id="id" name="id" value="{{id}}" /> <br />
-        <label for="name">커피 이름 : </label><span id="name" >{{name}}</span> <br />
-        <label for="price">커피 가격 : </label><span id="price" >{{price}}</span> <br />
-        <label for="source">소스 종류 : </label><span id="source" >{{source}}</span> <br />
-        <label for="shots">샷 수 : </label><span id="shots" >{{shots}}</span> <br />
-        <input type="submit" value="커피 정보 삭제"/>
+            <label for="name">커피 이름 : </label><span id="name" >{{name}}</span> <br />
+            <label for="price">커피 가격 : </label><span id="price" >{{price}}</span> <br />
+            <label for="source">소스 종류 : </label><span id="source" >{{source}}</span> <br />
+            <label for="shots">샷 수 : </label><span id="shots" >{{shots}}</span> <br />
+            <button onclick="location.href='./update?id={{id}}'">수정</button>
+            <form method="post" action="./delete">
+                <input type="hidden" id="id" name="id" value="{{id}}" />
+                <input type="submit" value="커피 정보 삭제"/>
+            </form>
         {{/data}}
         {{^data}}
         <div>데이터가 없습니다.</div>
         {{/data}}
-        </form>
+<!--        <button onclick="location.href='./update?id={{data.id}}'">수정</button>-->
     </div>
 </body>
 </html>

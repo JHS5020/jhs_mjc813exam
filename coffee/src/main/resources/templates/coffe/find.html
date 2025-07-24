@@ -8,15 +8,18 @@
     <h1>검색 찾기 결과</h1>
     <div>
         {{#data}}
-        <label for="id">id : </label><span id="id" >{{id}}</span> <br />
+        <form method="post" action="./delete">
+        <label for="id">id : </label><input type="text" id="id" name="id" value="{{id}}" /> <br />
         <label for="name">커피 이름 : </label><span id="name" >{{name}}</span> <br />
         <label for="price">커피 가격 : </label><span id="price" >{{price}}</span> <br />
         <label for="source">소스 종류 : </label><span id="source" >{{source}}</span> <br />
         <label for="shots">샷 수 : </label><span id="shots" >{{shots}}</span> <br />
+        <input type="submit" value="커피 정보 삭제"/>
         {{/data}}
         {{^data}}
         <div>데이터가 없습니다.</div>
         {{/data}}
+        </form>
     </div>
 </body>
 </html>

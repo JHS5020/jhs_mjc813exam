@@ -38,4 +38,16 @@
         FROM coffee_tbl
         WHERE id = #{id}
     </select>
+    <update id="changeCoffee" parameterType="CoffeeDto">
+        UPDATE coffee_tbl set
+            name = #{name}
+            ,price = #{price}
+            ,source = #{source}
+            ,shots = #{shots}
+        where id = #{id}
+    </update>
+    <delete id="deleteCoffee" parameterType="Long">
+        DELETE from coffee_tbl
+        where id = #{id}
+    </delete>
 </mapper>

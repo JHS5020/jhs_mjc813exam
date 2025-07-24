@@ -53,4 +53,35 @@ public class CoffeeController {
         }
         return "/coffe/find";
     }
+
+    @GetMapping("/update")
+    public String update(@RequestParam("id") Long id, Model model) {
+        try {
+            CoffeeDto coffeeDto = this.coffeeService.findCoffee(id);
+            model.addAttribute("data0", coffeeDto);
+        } catch (Throwable e) {
+            System.out.println(e.toString());
+        }
+        return "/coffe/update";
+    }
+
+    @PostMapping("/update")
+    public String changeCoffee(@ModelAttribute CoffeeDto dto) {
+        try {
+            this.coffeeService.changeCoffee(dto);
+        } catch (Throwable e) {
+            System.out.println(e.toString());
+        }
+        return "redirect:/coffee/list";
+    }
+
+    @PostMapping("/delete")
+    public String delete(@ModelAttribute CoffeeDto dto) {
+        try {
+            this.coffeeService.deleteCoffee(dto.getId());
+        } catch (Throwable e) {
+            System.out.println(e.toString());
+        }
+        return "redirect:/coffee/list";
+    }
 }

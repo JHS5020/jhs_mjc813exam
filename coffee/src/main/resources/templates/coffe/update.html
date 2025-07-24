@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>커피 정보 수정</title>
+</head>
+<body>
+  <form method="post" action="./update">
+    {{#data0}}
+    <input type="hidden" id="id" name="id" value="{{id}}">
+    <label for="name">커피이름 :</label><input type="text" id="name" name="name" value="{{name}}"/><br/>
+    <label for="price">커피가격 :</label><input type="text" id="price" name="price" value="{{price}}"/><br/>
+    <label for="source">커피소스 :</label><input type="text" id="source" name="source" value="{{source}}"/><br/>
+    <label for="shots">커피샷 :</label><input type="text" id="shots" name="shots" value="{{shots}}"/><br/>
+    <input type="submit" value="커피 변경"/>
+    {{/data0}}
+  </form>
+</body>
+</html>

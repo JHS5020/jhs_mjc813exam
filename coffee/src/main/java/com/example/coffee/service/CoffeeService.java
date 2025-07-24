@@ -26,4 +26,12 @@ public class CoffeeService {
         CoffeeDto coffeeDto = this.coffeeMybatisMapper.findCoffee(id);
         return coffeeDto;
     }
+
+    public void changeCoffee(CoffeeDto dto) {
+        this.coffeeMybatisMapper.changeCoffee(dto);
+    }
+
+    public void deleteCoffee(Long id){
+        this.coffeeMybatisMapper.deleteCoffee(id);
+    }
 }

@@ -14,8 +14,9 @@ public class SwimpoolService {
         this.swimpoolMybatis.addSwimpool(dto);
     }
 
-    public List<SwimpoolDto> findAll(SwimpoolDto dto){
-        return this.swimpoolMybatis.findAll();
+    public List<SwimpoolDto> findAll() {
+        List<SwimpoolDto> all = this.swimpoolMybatis.findAll();
+        return all;
     }
 
     public SwimpoolDto findSwimpool(Long id){

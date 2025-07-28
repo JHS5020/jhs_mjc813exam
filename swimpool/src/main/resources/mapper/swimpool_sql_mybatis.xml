@@ -5,14 +5,14 @@
     <insert id="addSwimpool" parameterType="SwimpoolDto">
         INSERT INTO swimpool_tbl (
                                    name
-                               , ranes
-                               , rane_type
+                               , lanes
+                               , lane_type
                                , phone_number
                                , addr
         ) VALUES (
                    #{name}
-                 , #{ranes}
-                 , #{raneType}
+                 , #{lanes}
+                 , #{laneType}
                  , #{phoneNumber}
                  , #{addr}
                  )
@@ -22,8 +22,8 @@
         SELECT
             id
              , name
-             , ranes
-             , rane_type
+             , lanes
+             , lane_type
              , phone_number
              , addr
         FROM swimpool_tbl
@@ -34,8 +34,8 @@
         SELECT
             id
              , name
-             , ranes
-             , rane_type
+             , lanes
+             , lane_type
              , phone_number
              , addr
         FROM swimpool_tbl
@@ -45,8 +45,8 @@
     <update id="updateSwimpool" parameterType="SwimpoolDto">
         UPDATE swimpool_tbl SET
             name = #{name}
-                            , ranes = #{ranes}
-                            , rane_type = #{raneType}
+                            , lanes = #{lanes}
+                            , lane_type = #{laneType}
                             , phone_number = #{phoneNumber}
                             , addr = #{addr}
         WHERE id = #{id}

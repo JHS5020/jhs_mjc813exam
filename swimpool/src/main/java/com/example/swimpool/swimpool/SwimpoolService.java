@@ -10,8 +10,9 @@ public class SwimpoolService {
     @Autowired
     private ISwimpoolMybatis swimpoolMybatis;
 
-    public void addSwimpool(SwimpoolDto dto){
+    public SwimpoolDto addSwimpool(SwimpoolDto dto){
         this.swimpoolMybatis.addSwimpool(dto);
+        return dto;
     }
 
     public List<SwimpoolDto> findAll() {
@@ -19,15 +20,16 @@ public class SwimpoolService {
         return all;
     }
 
-    public SwimpoolDto findSwimpool(Long id){
+    public SwimpoolDto findSwimpool(Integer id){
         return this.swimpoolMybatis.findSwimpool(id);
     }
 
-    public void updateSwimpool(SwimpoolDto dto){
+    public SwimpoolDto updateSwimpool(SwimpoolDto dto){
         this.swimpoolMybatis.updateSwimpool(dto);
+        return dto;
     }
 
-    public void deleteSwimpool(Long id){
+    public void deleteSwimpool(Integer id){
         this.swimpoolMybatis.deleteSwimpool(id);
     }
 }

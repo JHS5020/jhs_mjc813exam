@@ -8,7 +8,7 @@ import java.util.List;
 public interface ISwimpoolMybatis {
     public void addSwimpool(SwimpoolDto dto);
     public List<SwimpoolDto> findAll();
-    public SwimpoolDto findSwimpool(Long id);
+    public SwimpoolDto findSwimpool(Integer id);
     public void updateSwimpool(SwimpoolDto dto);
-    public void deleteSwimpool(Long id);
+    public void deleteSwimpool(Integer id);
 }

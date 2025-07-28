@@ -8,10 +8,10 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class SwimpoolDto {
-    private Long id;
+    private Integer id;
     private String name;
-    private String ranes;
-    private String raneType;
+    private Integer lanes;
+    private String laneType;
     private String phoneNumber;
     private String addr;
 }

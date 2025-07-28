@@ -10,6 +10,8 @@ spring:
     suffix: .html
     enabled: true
     charset: UTF-8
+    servlet:
+      cache: false
 
 
 server:
@@ -22,6 +24,6 @@ server:
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: com.mjc813.swimpool
+  type-aliases-package: com.example.swimpool
   configuration:
     map-underscore-to-camel-case: true

@@ -1,0 +1,2 @@
+ERROR 25-07-28 15:01:15[http-nio-8084-exec-6] [SwimpoolApiController:32] - java.lang.ArithmeticException: / by zero
+ERROR 25-07-28 15:01:18[http-nio-8084-exec-10] [SwimpoolApiController:32] - java.lang.ArithmeticException: / by zero

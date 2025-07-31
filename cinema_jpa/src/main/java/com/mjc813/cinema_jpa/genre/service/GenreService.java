@@ -11,7 +11,12 @@ public class GenreService {
     private GenreRepository GenreRepository;
 
     public void insert(GenreDto dto) {
-        GenreEntity entity = new GenreEntity(0L, dto.getName());
+        GenreEntity entity = new GenreEntity(null, dto.getName());
+        this.GenreRepository.save(entity);
+    }
+
+    public void update(GenreDto dto) {
+        GenreEntity entity = new GenreEntity(null, dto.getName());
         this.GenreRepository.save(entity);
     }
 }

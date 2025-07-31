@@ -2,7 +2,9 @@ package com.mjc813.cinema_jpa.genre.controller;
 
 
 import com.mjc813.cinema_jpa.common.ResponseDto;
+
 import com.mjc813.cinema_jpa.genre.dto.GenreDto;
+import com.mjc813.cinema_jpa.genre.dto.GenreEntity;
 import com.mjc813.cinema_jpa.genre.service.GenreService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,24 +22,33 @@ public class GenreRestController {
     @Autowired
     private GenreService genreService;
 
-//    @PostMapping("")
-//    public ResponseEntity<ResponseDto> insert(@Validated @RequestBody GenreDto dto) {
-//        try {
-////            this.genreService.insert(dto);
-//            ResponseDto result = ResponseDto.builder()
-//                    .message("success")
-//                    .resultCode(50010)
-//                    .resultData(dto)
-//                    .build();
-//            return ResponseEntity.ok(result);
-//        } catch (Throwable e) {
-//            log.error(e.toString());
-//            ResponseDto result = ResponseDto.builder()
-//                    .message("error")
-//                    .resultCode(90000)
-//                    .resultData(null)
-//                    .build();
-//            return ResponseEntity.status(500).body(result);
-//        }
-//    }
+    @PostMapping("")
+    public ResponseEntity<ResponseDto> insert(@Validated @RequestBody GenreDto dto) {
+        try {
+            this.genreService.insert(dto);
+            ResponseDto result = ResponseDto.builder()
+                    .message("success")
+                    .resultCode(50010)
+                    .resultData(dto)
+                    .build();
+            return ResponseEntity.ok(result);
+        } catch (Throwable e) {
+            log.error(e.toString());
+            ResponseDto result = ResponseDto.builder()
+                    .message("error")
+                    .resultCode(90000)
+                    .resultData(null)
+                    .build();
+            return ResponseEntity.status(500).body(result);
+        }
+    }
+
+    private ResponseDto getResponseDto(String message, Integer code,Object data) {
+        ResponseDto result = ResponseDto.builder()
+                .message(message)
+                .resultCode(code)
+                .resultData(data)
+                .build();
+        return result;
+    }
 }

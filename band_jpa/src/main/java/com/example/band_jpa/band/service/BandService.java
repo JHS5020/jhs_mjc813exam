@@ -10,7 +10,7 @@ public class BandService {
     @Autowired
     private BandReporitory bandRepository;
 
-    public void insert(BandDto dto){
+    public BandEntity insert(BandDto dto){
         BandEntity band = new BandEntity(null
                 ,dto.getName()
                 ,dto.getLeader()
@@ -21,5 +21,6 @@ public class BandService {
                 ,dto.getKeyboard()
                 ,dto.getVocal());
         this.bandRepository.save(band);
+        return band;
     }
 }

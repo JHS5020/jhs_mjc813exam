@@ -1,4 +1,4 @@
-package com.mjc813.cinema_jpa.genre.dto;
+package com.mjc813.cinema_jpa.cinema.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GenreDto {
-    private Long id;
-    private String name;
-    private Integer restrictAge;
+public class CinemaGenreDto extends CinemaDto {
+    private String genreName;
 }

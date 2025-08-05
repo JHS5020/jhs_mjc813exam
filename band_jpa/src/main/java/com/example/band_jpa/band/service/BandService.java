@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BandService {
     @Autowired
-    private BandReporitory bandRepository;
+    private BandRepository bandRepository;
 
     public BandEntity insert(BandDto dto){
         BandEntity band = new BandEntity(null

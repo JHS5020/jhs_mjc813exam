@@ -1,7 +1,5 @@
 package com.example.food_jpa.food_category.service;
 
-import com.example.food_jpa.food_category.dto.FoodCategoryDto;
-import com.example.food_jpa.food_category.dto.FoodCategoryEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

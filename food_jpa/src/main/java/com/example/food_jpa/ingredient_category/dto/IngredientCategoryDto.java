@@ -1,6 +1,6 @@
 package com.example.food_jpa.ingredient_category.dto;
 
-import com.example.food_jpa.common.IIdName;
+import com.mjc813.food_web.common.IIdName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,4 +12,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class IngredientCategoryDto implements IIdName {
     private Long id;
+    private String name;
 }

@@ -1,6 +1,6 @@
 package com.example.food_jpa.food_category.dto;
 
-import com.example.food_jpa.common.IIdName;
+import com.mjc813.food_web.common.IIdName;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,6 +17,7 @@ public class FoodCategoryEntity implements IIdName {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
 
+    @Column(length = 50, nullable = false, unique = true)
+    private String name;
 }

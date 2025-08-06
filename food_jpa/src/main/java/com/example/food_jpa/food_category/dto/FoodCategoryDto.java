@@ -1,7 +1,6 @@
 package com.example.food_jpa.food_category.dto;
 
-
-import com.example.food_jpa.common.IIdName;
+import com.mjc813.food_web.common.IIdName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

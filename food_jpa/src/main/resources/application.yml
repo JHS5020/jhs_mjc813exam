@@ -6,12 +6,20 @@ spring:
     url: jdbc:mysql://localhost:3306/food_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8	# ?????? URL
     username: food_user
     password: food_4321@
-
+  mustache:
+    suffix: .html
+    servlet:
+      cache: false
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
+mybatis:
+  type-aliases-package: com.mjc813.food_jpa
+  mapper-locations: classpath:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
 
 server:
   port: 8287

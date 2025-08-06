@@ -19,8 +19,8 @@ public class FoodCategoryRestController {
     @Autowired
     private FoodCategoryService foodCategoryService;
 
-    @PostMapping("")
-    public ResponseEntity<FoodCategoryDto> insert(@Validated @RequestBody FoodCategoryDto foodCategoryDto) {
-
-    }
+//    @PostMapping("")
+//    public ResponseEntity<FoodCategoryDto> insert(@Validated @RequestBody FoodCategoryDto foodCategoryDto) {
+//
+//    }
 }

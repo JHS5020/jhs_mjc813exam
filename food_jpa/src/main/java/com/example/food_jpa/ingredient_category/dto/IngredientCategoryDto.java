@@ -1,5 +1,4 @@
-package com.example.food_jpa.food_category.dto;
-
+package com.example.food_jpa.ingredient_category.dto;
 
 import com.example.food_jpa.common.IIdName;
 import lombok.AllArgsConstructor;
@@ -11,7 +10,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FoodCategoryDto implements IIdName {
+public class IngredientCategoryDto implements IIdName {
     private Long id;
-    private String name;
 }

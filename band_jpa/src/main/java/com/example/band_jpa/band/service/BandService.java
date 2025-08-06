@@ -23,4 +23,13 @@ public class BandService {
         this.bandRepository.save(band);
         return band;
     }
+
+    public void update(BandEntity obj){
+        this.bandRepository.save(obj);
+        this.bandRepository.flush();
+    }
+
+    public void delete(Long id){
+
+    }
 }

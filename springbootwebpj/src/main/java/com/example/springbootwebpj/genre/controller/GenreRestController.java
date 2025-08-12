@@ -43,7 +43,7 @@ public class GenreRestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Long> update(@PathVariable Long id) {
+    public ResponseEntity<Long> delete(@PathVariable Long id) {
         try {
             this.genreRepository.deleteById(id);
             return ResponseEntity.ok().body(id);

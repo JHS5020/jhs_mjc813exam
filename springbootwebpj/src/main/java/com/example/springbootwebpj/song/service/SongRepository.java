@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SongRepository extends JpaRepository<SongEntity, Long> {
-    Page<SongEntity> findByNameContains(String name, Pageable pageable);
+    Page<SongEntity> findByTitleContains(String title, Pageable pageable);
 }

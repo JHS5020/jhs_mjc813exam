@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+
 @Slf4j
 @RestController
 @RequestMapping("/song")
@@ -53,9 +54,9 @@ public class SongRestController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<SongEntity>> findByNameContains(@RequestParam String name, Pageable pageable) {
+    public ResponseEntity<Page<SongEntity>> findByTitleContains(@RequestParam String title, Pageable pageable) {
         try {
-            Page<SongEntity> list = this.songRepository.findByNameContains(name, pageable);
+            Page<SongEntity> list = this.songRepository.findByTitleContains(title, pageable);
             return ResponseEntity.ok().body(list);
         } catch (Throwable e) {
             log.error(e.toString());

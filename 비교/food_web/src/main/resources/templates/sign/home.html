@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>SignUp / SignIn</title>
+</head>
+<body>
+    <h1>회원가입 & 회원사인인</h1>
+    <div>
+        <div class="nav-item">
+            <span>
+                <span><input type="text" id="signUserId" size="6" maxlength="20"/></span>
+                <span><input type="password" id="signPasswd" size="6" maxlength="20"/></span>
+                <span><button id="signInBtn">SignIn</button></span>
+                <span><button id="signOutBtn">SignOut</button></span>
+            </span>
+        </div>
+    </div>
+</body>
+
+<script src="/js/jquery-3.7.1.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $("#signInBtn").click(function() {
+            $.signIn();
+        });
+        $("#signOutBtn").click(function() {
+            $.signOut();
+        });
+    });
+
+    $.signIn = function() {
+        let data = {
+            "userId": $("#signUserId").val(),
+            "passwd": $("#signPasswd").val(),
+        };
+
+        $.ajax({
+            url: '/sign/signin',
+            type: "POST",
+            data: JSON.stringify(data),
+            datatype: "JSON",
+            contentType: 'application/json',
+        }).done(function(data, textStatus, jqXHR) {
+            console.log("Success:", data.result);
+            document.location.href = "/";
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.log("Error:", textStatus, errorThrown);
+            alert(`${jqXHR.responseJSON.code} : ${jqXHR.responseJSON.message}`);
+        });
+    }
+
+    $.signOut = () => {
+        $.ajax({
+            url: '/sign/signout',
+            type: "GET",
+        }).done(function(data, textStatus, jqXHR) {
+            console.log("Success:", data.result);
+            document.location.href = "/";
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.log("Error:", textStatus, errorThrown);
+            alert(`${jqXHR.responseJSON.code} : ${jqXHR.responseJSON.message}`);
+        });
+    }
+</script>
+</html>

@@ -2,6 +2,7 @@ package com.mjc813.swimpool_app.swimpool.apicontroller;
 
 import com.mjc813.swimpool_app.common.ResponseDto;
 import com.mjc813.swimpool_app.common.ResponseEnum;
+import com.mjc813.swimpool_app.common.ResponseListDto;
 import com.mjc813.swimpool_app.swimpool.dto.SwimpoolDto;
 import com.mjc813.swimpool_app.swimpool.dto.SwimpoolSearchingDto;
 import com.mjc813.swimpool_app.swimpool.service.SwimpoolService;
@@ -128,14 +129,20 @@ public class SwimpoolApiController {
         }
     }
 
-    @GetMapping("")
+    @PostMapping("/find")
     public ResponseEntity<ResponseDto> findByWhere(@RequestBody SwimpoolSearchingDto dto) {
         try {
             Integer count = this.swimpoolService.countByWhere(dto);
-            dto.setTotalRow(count);
+            dto.getResultList().setTotalRow(count);
             List<SwimpoolDto> list = this.swimpoolService.findByWhere(dto);
+            ResponseListDto result = ResponseListDto.builder()
+                    .curPage(dto.getResultList().getCurPage())
+                    .rowsPage(dto.getResultList().getRowsPage())
+                    .totalRow(dto.getResultList().getTotalRow())
+                    .data(list)
+                    .build();
             return ResponseEntity.ok().body(
-                    this.getResponse(ResponseEnum.Success, list)
+                this.getResponse(ResponseEnum.Success, result)
             );
         } catch (Throwable e) {
             log.error(e.toString());

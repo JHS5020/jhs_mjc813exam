@@ -49,8 +49,13 @@
             background-color: rgba(0, 0, 0, 0.5);
             /*z-index: 99;*/
         }
+
+        .nowPage {
+            color: red;
+        }
     </style>
     <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script>
         $(document).ready(function(){
             // html파일이 로딩 완료되면 jquery 가 자동으로 실행한다.
@@ -64,14 +69,6 @@
                 $("#updateButton").hide();
                 $("#updateActionButton").hide();
                 $("#deleteActionButton").hide();
-
-                $.clearInputPopup();
-
-                $("#inName").removeAttr("disabled");
-                $("#inPhoneNumber").removeAttr("disabled");
-                $("#inAddr").removeAttr("disabled");
-                $("#inLaneType").removeAttr("disabled");
-                $("#inLanes").removeAttr("disabled");
                 $('.modal_popup').fadeIn(300);
                 $('.modal_background').fadeIn(300);
             });
@@ -99,13 +96,17 @@
             $("#updateActionButton").on("click", function(){
                 $.update();
             });
+
         });
+
+        alert("read cookie jquery : " + $.cookie("mycookie2"));
+        $.cookie("mycookie2", "Student", { expires: 60 * 3 });
 
         $.loadData = () => {
             $.list();   // jquery 함수 실행
         }
 
-        $.list = function() {
+        $.listOld = function() {
             $.ajax({
                 // javascript 의 Ajax 모태로 만든 jQuery Ajax 를 실행한다.
                 // ajax : 비동기 자바스크립트 http 통신 방법
@@ -118,7 +119,8 @@
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 // ajax 비동기 요청 실행후에 에러 응답이 왔을때 실행
                 console.log("Error:", jqXHR, textStatus, errorThrown);
-                alert(`${jqXHR.responseJSON.responseEnum} : ${jqXHR.responseJSON.data.message}`);
+                $.showError(jqXHR.responseJSON);
+                // alert(`${jqXHR.responseJSON.responseEnum} : ${jqXHR.responseJSON.message}`);
             });
         }
 
@@ -214,7 +216,8 @@
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 // ajax 비동기 요청 실행후에 에러 응답이 왔을때 실행
                 console.log("Error:", jqXHR, textStatus, errorThrown);
-                alert(`${jqXHR.responseJSON.responseEnum} : ${jqXHR.responseJSON.data.message}`);
+                $.showError(jqXHR.responseJSON);
+                // alert(`${jqXHR.responseJSON.responseEnum} : ${jqXHR.responseJSON.message}`);
             });
         }
 
@@ -266,7 +269,8 @@
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 // ajax 비동기 요청 실행후에 에러 응답이 왔을때 실행
                 console.log("Error:", jqXHR, textStatus, errorThrown);
-                alert(`${jqXHR.responseJSON.responseEnum} : ${jqXHR.responseJSON.data.message}`);
+                $.showError(jqXHR.responseJSON);
+                // alert(`${jqXHR.responseJSON.responseEnum} : ${jqXHR.responseJSON.message}`);
             });
         }
 
@@ -282,8 +286,124 @@
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 // ajax 비동기 요청 실행후에 에러 응답이 왔을때 실행
                 console.log("Error:", jqXHR, textStatus, errorThrown);
-                alert(`${jqXHR.responseJSON.responseEnum} : ${jqXHR.responseJSON.data.message}`);
+                $.showError(jqXHR.responseJSON);
+                // alert(`${jqXHR.responseJSON.responseEnum} : ${jqXHR.responseJSON.message}`);
             });
+        }
+
+        $.showError = function(errorObject) {
+            alert( `code:${errorObject.code}, Enum:${errorObject.responseEnum}` );
+        }
+
+        $.goPage = (nPage) => {
+            $("#curPage").val(nPage);
+            $.list();
+        }
+
+
+        $.list = function() {
+            let searching = {
+                "resultList": {
+                    "rowsPage": $("#rowsPage").val()
+                    , "curPage": $("#curPage").val()
+                }
+                , "name": $("#searchName").val()
+                , "laneType": $("#searchLaneType").val()
+                , "phoneNumber": $("#searchPhoneNumber").val()
+                , "addr": $("#searchAddr").val()
+            };
+            $.ajax({
+                // javascript 의 Ajax 모태로 만든 jQuery Ajax 를 실행한다.
+                // ajax : 비동기 자바스크립트 http 통신 방법
+                url: '/api/v1/swimpool/find'
+                , type: 'post'
+                , data: JSON.stringify(searching)
+                , datatype: 'JSON'
+                , contentType: 'application/json'
+            }).done(function(result, textStatus, jqXHR) {
+                // ajax 비동기 요청 실행후에 서버에서 정상 응답이 왔을때 실행
+                console.log("Success:", result);
+                $.printSearchingResult(result.data);
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                // ajax 비동기 요청 실행후에 에러 응답이 왔을때 실행
+                console.log("Error:", jqXHR, textStatus, errorThrown);
+                $.showError(jqXHR.responseJSON);
+            });
+        }
+
+        $.printSearchingResult = function(resultData) {
+            $("#totalRow").text(resultData.totalRow);
+            $.printList(resultData.data);
+            $.printPageFavButtons(resultData);
+        }
+
+        $.printPageFavButtons = function(resultData) {
+            // curPage	rowsPage	totalRows	totalPage
+            // 1		3			10			12/3 = 4 page
+            // 1        3		    12			14/3 = 4 page
+            // 1        3		    2			4/3 = 1 page
+            //                                  (totalRow + rowsPage - 1) / rowsPage = totalPage
+            // 12		3			120			122/3 = 40 page
+            //      <<  <  11 [12] 13 14 15 16 17 18 19 20 > >>
+            //      << < 8 9 10 11 [12] 13 14 15 16 > >>
+            //          printPage = 5 / 2 => 2;
+            // 2번 방법
+            let printPages = 5;
+            let rowsPage = resultData.rowsPage * 1;
+            let curPage = Number(resultData.curPage);
+            let totalRow = resultData.totalRow * 1;
+            let totalPage = (totalRow + rowsPage - 1) / rowsPage;   // 전체행과 페이지당데이터수를 이용하여 전체페이지수를 구했다.
+            let prevString = $.makePrevButtonString(curPage);
+            let nextString = $.makeNextButtonString(curPage, totalPage);
+            let startPageNumber = (curPage <= (printPages + 1) / 2) ? 1 : (curPage - Math.floor(printPages / 2));
+            // 페이지버튼5개 출력할때 시작번호
+            let buttonString = $.makeButtonPageString(curPage, totalPage, printPages, startPageNumber);
+            console.log(prevString + buttonString + nextString);
+            $("#listButton").html(prevString + buttonString + nextString);
+            // id="listButton" 태그의 안에 html 태그를 썻다.
+        }
+
+        $.makePrevButtonString = function (curPage) {
+            // 이전 페이지 이동 버튼
+            let prevString = "";
+            if ( curPage - 10 >= 1 ) {
+                prevString += `<button onclick="$.goPage(${curPage - 10})">◀</button>`;
+                // 현재페이지 - 10 계산한 페이지로 이동
+            }
+            if ( curPage - 1 >= 1 ) {
+                prevString += `<button onclick="$.goPage(${curPage - 1})">←</button>`;
+                // 현재페이지 - 1 계산한 페이지로 이동
+            }
+            return prevString;
+        }
+
+        $.makeNextButtonString = (curPage, totalPage) => {
+            // 이후 페이지 이동 버튼
+            let nextString = "";
+            if ( curPage + 1 <= totalPage ) {
+                nextString += `<button onclick="$.goPage(${curPage + 1})">→</button>`;
+                // 현재페이지 + 1 계산한 페이지로 이동
+            }
+            if ( curPage + 10 <= totalPage ) {
+                nextString += `<button onclick="$.goPage(${curPage + 10})">▶</button>`;
+                // 현재페이지 + 10 계산한 페이지로 이동
+            }
+            return nextString;
+        }
+
+        $.makeButtonPageString = (curPage, totalPage, printPages, nPage) => {
+            // nPage 부터 시작하여 printPages 까지 또는 전체페이지까지 버튼을 출력한다.
+            let buttonString = "";
+            for (let cnt = 1; cnt <= printPages && nPage <= totalPage; cnt++) {
+                if (nPage === curPage) {
+                    // 현재 페이지의 클래스를 추가한다.
+                    buttonString += `<button class="nowPage" onclick="$.goPage(${nPage})">${nPage}</button>`;
+                } else {
+                    buttonString += `<button onclick="$.goPage(${nPage})">${nPage}</button>`;
+                }
+                nPage++;
+            }
+            return buttonString;
         }
     </script>
 </head>
@@ -294,19 +414,45 @@
         <div class="container px-4 px-lg-5">
             <div class="card text-white bg-secondary my-5 py-4 text-center">
                 <div class="card-body"><p class="text-white m-0">수영자 정보 목록</p></div>
+                <div class="card-footer">
+                    <div>
+                        <label for="searchName">이름포함</label><input type="text" id="searchName" >
+                        <label for="searchPhoneNumber">전화</label><input type="text" id="searchPhoneNumber" >
+                        <label for="searchAddr">주소</label><input type="text" id="searchAddr" >
+                        <label for="searchLaneType">타입</label>
+                            <select id="searchLaneType">
+                                <option value="">ALL</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                        <label for="rowsPage">페이지당행수</label>
+                        <select id="rowsPage">
+                            <option value="3">3</option>
+                            <option value="9">9</option>
+                            <option value="18">18</option>
+                            <option value="45">45</option>
+                            <option value="90">90</option>
+                        </select>
+                        <input type="number" id="curPage" style="width:50px;"/>
+                        <div>검색행수 (<div id="totalRow"></div>)</div>
+                        <div><button onclick="$.list();">검색</button></div>
+                    </div>
+                </div>
             </div>
             <!-- Content Row-->
             <div id="listPrint" class="row gx-4 gx-lg-5">
+            </div>
+            <div id="listButton" class="row gx-4 gx-lg-5">
             </div>
         </div>
         <div class="modal_popup" style="display: none; z-index: 9;">
             <h1>수영장 <span id="titleForm">입력</span></h1>
             <input type="hidden" id="id" name="id" value=""/>
-            <div><label for="inName">이름 : </label><input type="text" id="inName" name="name" value="" maxlength="20"/></div>
-            <div><label for="inPhoneNumber">번호 : </label><input type="text" id="inPhoneNumber" name="phoneNumber" value="" maxlength="20"/></div>
-            <div><label for="inAddr">주소 : </label><input type="text" id="inAddr" name="addr" value="" maxlength="20"/></div>
-            <div><label for="inLaneType">레인타입 : </label><select id="inLaneType" name="laneType"><option value="25">25</option><option value="50">50</select></div>
-            <div><label for="inLanes">레인수 : </label><input type="number" id="inLanes" name="lanes" value="" maxlength="2" /></div>
+            <div><label for="inName">이름 : </label><input type="text" id="inName" value="" maxlength="20"/></div>
+            <div><label for="inPhoneNumber">번호 : </label><input type="text" id="inPhoneNumber" value="" maxlength="20"/></div>
+            <div><label for="inAddr">주소 : </label><input type="text" id="inAddr" value="" maxlength="20"/></div>
+            <div><label for="inLaneType">레인타입 : </label><select id="inLaneType" ><option value="25">25</option><option value="50">50</select></div>
+            <div><label for="inLanes">레인수 : </label><input type="number" id="inLanes" value="" maxlength="2" /></div>
             <div><button id="insertActionButton" onclick="$.insert();">등록</button></div>
             <div><button id="updateButton">수정</button></div>
             <div><button id="updateActionButton">수정확인</button></div>
@@ -315,8 +461,8 @@
         </div>
         <div class="modal_background" style="display: none; z-index: 8;"></div>
         <div>
-<!--            <button onclick="$.showInsertPopup();">수영자추가1</button>-->
-            <button id="showAddModalButton">수영자추가</button>
+            <button onclick="$.showInsertPopup();">수영자추가1</button>
+            <button id="showAddModalButton">수영자추가2</button>
         </div>
     </div>
 </div>

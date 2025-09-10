@@ -1,7 +1,7 @@
 package com.example.backend.feature.hotelfilters;
 
 import com.example.backend.domain.Hotel;
-import com.example.backend.feature.hotelfilters.dto.HotelDto;
+import com.example.backend.feature.hotelfilters.dto.HotelSearchResponseDto;
 import com.example.backend.feature.hotelfilters.dto.HotelFilterRequestDto;
 import com.example.backend.repository.HotelRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class HotelFiltersService {
 
     private final HotelRepository hotelRepository;
 
-    public Page<HotelDto> filterHotels(HotelFilterRequestDto request, Pageable pageable) {
+    public Page<HotelSearchResponseDto> filterHotels(HotelFilterRequestDto request, Pageable pageable) {
         // Specification으로 DB에서 필터 적용
         Specification<Hotel> spec = HotelSpecifications.withFilters(request);
 
@@ -28,10 +28,10 @@ public class HotelFiltersService {
         Page<Hotel> hotelPage = hotelRepository.findAll(spec, pageable);
 
         // DTO 변환
-        return hotelPage.map(h -> new HotelDto(
+        return hotelPage.map(h -> new HotelSearchResponseDto(
                 h.getId(),
                 h.getName(),
-                h.getCity().getCityName(),
+                h.getAddress(),
                 h.getGrade(),
                 countAmenities(h),
                 getLowestPrice(h),

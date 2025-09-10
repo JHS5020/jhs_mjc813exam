@@ -1,6 +1,6 @@
 package com.example.backend.feature.hotelfilters;
 
-import com.example.backend.feature.hotelfilters.dto.HotelDto;
+import com.example.backend.feature.hotelfilters.dto.HotelSearchResponseDto;
 import com.example.backend.feature.hotelfilters.dto.HotelFilterRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -55,7 +55,7 @@ public class HotelFiltersController {
             @RequestParam int size
     ) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<HotelDto> hotelPage = hotelFiltersService.filterHotels(request, pageable);
+        Page<HotelSearchResponseDto> hotelPage = hotelFiltersService.filterHotels(request, pageable);
 
         Map<String, Object> response = new HashMap<>();
         response.put("hotels", hotelPage.getContent());

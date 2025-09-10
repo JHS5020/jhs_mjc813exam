@@ -12,12 +12,22 @@ import java.math.BigDecimal;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class HotelDto {
+public class HotelSearchResponseDto {
     private Long id;
     private String name;
-    private String cityName;
+    private String address;
     private int grade;
     private int amenitiesCount;
     private BigDecimal price;
     private String imageUrl;
+
+    // JPQL에서 new 생성자를 사용하기 위한 생성자
+    public HotelSearchResponseDto(Long hotelId, String name, String address, int grade, String imageUrl, BigDecimal minPrice) {
+        this.id = hotelId;
+        this.name = name;
+        this.address = address;
+        this.grade = grade;
+        this.imageUrl = imageUrl;
+        this.price = minPrice;
+    }
 }

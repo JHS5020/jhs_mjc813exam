@@ -1,8 +1,15 @@
 package com.example.backend.feature.hotelfilters;
 
-import com.example.backend.feature.hotelfilters.dto.HotelSearchResponseDto;
+import com.example.backend.feature.hotelfilters.dto.HotelDto;
 import com.example.backend.feature.hotelfilters.dto.HotelFilterRequestDto;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -11,11 +18,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController
-@RequestMapping("/api/hotels")
-@RequiredArgsConstructor
-public class HotelFiltersController {
+import java.util.List;
 
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api/hotels")
+public class HotelFiltersController {
     private final HotelFiltersService hotelFiltersService;
 
     /**
@@ -27,7 +35,7 @@ public class HotelFiltersController {
      * @return : 호텔 리스트 + 전체 호텔 수
      *
      *
-     * http://localhost:8818/api/hotels/filter?page=0&size=4 주소
+     * http://localhost:8888/api/hotels/filter?page=0&size=4 주소
      *
      * 모든 조건, 임시(아이디 순으로) 첫번째 페이지에 4개씩 불러오는
      * {
@@ -55,7 +63,7 @@ public class HotelFiltersController {
             @RequestParam int size
     ) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<HotelSearchResponseDto> hotelPage = hotelFiltersService.filterHotels(request, pageable);
+        Page<HotelDto> hotelPage = hotelFiltersService.filterHotels(request, pageable);
 
         Map<String, Object> response = new HashMap<>();
         response.put("hotels", hotelPage.getContent());

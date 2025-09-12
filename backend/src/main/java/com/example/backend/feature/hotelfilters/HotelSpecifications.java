@@ -1,15 +1,19 @@
 package com.example.backend.feature.hotelfilters;
 
-import com.example.backend.domain.*;
+import com.example.backend.amenities.entity.Amenities;
+import com.example.backend.hotel.entity.Freebies;
+import com.example.backend.hotel.entity.Hotel;
 import com.example.backend.feature.hotelfilters.dto.HotelFilterRequestDto;
-import org.springframework.data.jpa.domain.Specification;
-
-import jakarta.persistence.criteria.Predicate;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.example.backend.hotel.entity.Reservation;
+import com.example.backend.hotel.entity.Room;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
+import org.springframework.data.jpa.domain.Specification;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HotelSpecifications {
 
@@ -24,29 +28,28 @@ public class HotelSpecifications {
                 predicates.add(cb.equal(root.get("city").get("cityName"), request.getCityName()));
             }
 
-            // === Room & Reservation JOIN ===
+            // === 객실, 예약정보 조인 ===
             Join<Hotel, Room> rooms = root.join("rooms", JoinType.LEFT);
             Join<Room, Reservation> reservations = rooms.join("reservations", JoinType.LEFT);
 
-            // === 예약 날짜 필터: 예약이 겹치지 않는 방만 ===
-            if (request.getCheckInDate() != null && request.getCheckOutDate() != null) {
+            // === 예약 날짜 필터 ===
+            LocalDate checkIn = request.getCheckInDate();
+            LocalDate checkOut = request.getCheckOutDate();
+
+            if (checkIn != null && checkOut != null) {
                 Predicate overlap = cb.and(
-                        cb.lessThan(reservations.get("checkInDate"), request.getCheckOutDate()),
-                        cb.greaterThan(reservations.get("checkOutDate"), request.getCheckInDate())
+                        cb.lessThan(reservations.get("checkinDate"), checkOut),
+                        cb.greaterThan(reservations.get("checkoutDate"), checkIn)
                 );
                 predicates.add(cb.or(cb.isNull(reservations.get("id")), cb.not(overlap)));
+            } else {
+                // 날짜가 null이면 예약 필터를 적용하지 않음
+                // -> 모든 방 조회 가능
             }
 
-            // === 최소 예약 가능한 방 수 (roomsGuest 기준) ===
-            if (request.getMinAvailableRooms() != null) {
-                query.groupBy(root.get("id"));
-                predicates.add(cb.ge(cb.count(rooms.get("id")), request.getMinAvailableRooms()));
-            }
 
-            // === 기존 무료서비스/편의시설 필터 ===
+            // === Freebies 필터 ===
             Join<Hotel, Freebies> freebies = root.join("freebies", JoinType.LEFT);
-            Join<Hotel, Amenities> amenities = root.join("amenities", JoinType.LEFT);
-
             if (Boolean.TRUE.equals(request.getBreakfastIncluded())) {
                 predicates.add(cb.isTrue(freebies.get("breakfastIncluded")));
             }
@@ -63,6 +66,8 @@ public class HotelSpecifications {
                 predicates.add(cb.isTrue(freebies.get("freeCancellation")));
             }
 
+            // === Amenities 필터 ===
+            Join<Hotel, Amenities> amenities = root.join("amenities", JoinType.LEFT);
             if (Boolean.TRUE.equals(request.getFrontDesk24())) {
                 predicates.add(cb.isTrue(amenities.get("frontDesk24")));
             }
@@ -79,12 +84,19 @@ public class HotelSpecifications {
                 ));
             }
 
-            // === 등급 필터 ===
-            if (request.getMinGrade() != null) {
-                predicates.add(cb.greaterThanOrEqualTo(root.get("grade"), request.getMinGrade()));
+//            // === 등급 필터 === rating이 grade 인줄알고 실수
+//            if (request.getMinGrade() != null) {
+//                predicates.add(cb.greaterThanOrEqualTo(root.get("grade"), request.getMinGrade()));
+//            }
+
+            // === 방 갯수 필터 ===
+            if (request.getMinAvailableRooms() != null) {
+                predicates.add(cb.greaterThanOrEqualTo(rooms.get("maxGuests"), request.getMinAvailableRooms()));
             }
 
-            // === 가격 필터 (최저가) ===
+
+
+            // === 가격 필터 ===
             if (request.getMinPrice() != null) {
                 predicates.add(cb.greaterThanOrEqualTo(rooms.get("price"), request.getMinPrice()));
             }
